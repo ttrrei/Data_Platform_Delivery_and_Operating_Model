@@ -105,7 +105,8 @@ L2 外链 L1 横切章节时，**必须**引用带版本 tag 的稳定锚点：
 | **Medallion 三层职责** | [§3](03-modeling-governance.md#medallion) | §2 / §4 / §5 / §7 |
 | **Governance-as-Code** | [§3](03-modeling-governance.md#governance-as-code) | §2 / §5 / §7 |
 | **Landing Layer** | [§4](04-ingestion-pipeline.md#landing-layer) | §2 / §5 |
-| **Platform Decision Record** | [§2](02-platform-selection.md#six-dimension-evaluation) | §6 |
+| **Platform Decision Record** | [§2](02-platform-selection.md#platform-decision-record) | §6 |
+| **Value Heat Map** | [§7](07-day2-operations.md#value-heat-map) | §5 |
 
 ---
 

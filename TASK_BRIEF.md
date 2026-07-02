@@ -74,7 +74,7 @@ Section 7 (Day-2 Ops)                         ← 引用 3/4 的产物定义
   - 六维评估模型表（workload / team / governance / streaming / FinOps / lock-in）
   - 三平台场景映射表（含「representative profile, 非绝对边界」声明）
   - 平台无关架构原则（OLAP/OLTP 分离、Landing Layer、Medallion 职责引用 Section 3）
-  - **分发映射**：Snowflake → 已有 Playbook 外链；Databricks → 待写 Playbook 外链；BigQuery → 占位
+  - **分发映射**：Snowflake → 已有 Playbook（URL 待补）；Databricks → 待写 Playbook 占位；BigQuery → 占位
 - **边界**：不写任何单平台的架构细节（留给 L2）。
 - **依赖**：Section 1 的 Requirements Profile；引用 Section 3 的 Medallion 定义。
 
@@ -140,7 +140,7 @@ Section 7 (Day-2 Ops)                         ← 引用 3/4 的产物定义
 - [x] 每节有稳定 slug 锚点，已记录成一张「锚点清单」供 L2 引用（`docs/cn/anchors.md`）
 - [x] Requirements Profile 字段在 Section 1 定义、Section 2 引用，命名一致
 - [x] 横切方法论无重复定义（Section 2/5/6/7 对 3/4 均为引用而非重写）
-- [x] Section 2 分发映射的外链指向真实 L2 repo（Snowflake 已有；Databricks 占位待补）
+- [ ] Section 2 分发映射填入真实 L2 repo URL（Snowflake repo 已存在、URL 待补填；Databricks / BigQuery 待 Playbook 落地）
 - [ ] 中文版定稿后产出英文版
 - [x] README 章节地图状态全部更新
 

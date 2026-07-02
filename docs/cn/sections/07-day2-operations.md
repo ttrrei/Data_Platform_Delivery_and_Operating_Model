@@ -1,4 +1,4 @@
-<!-- slug-anchors: sla-slo, finops, data-observability, incident-response, platform-evolution -->
+<!-- slug-anchors: sla-slo, value-heat-map, finops, data-observability, incident-response, platform-evolution -->
 
 # Section 7 — Day-2 Operations & Platform Governance
 
@@ -13,6 +13,7 @@
 <a id="sla-slo"></a>
 ## 7.1 价值优先级与 SLA / SLO 框架
 
+<a id="value-heat-map"></a>
 ### 7.1.1 Value Heat Map（先拿 Quick Wins）
 
 > 在初期交付阶段，我用一张「**业务价值 × 多团队使用度**」的 **Heat Map（热力图）** 来优先排序高影响、跨职能的数据资产，尽早给 stakeholder 交付即时价值。
@@ -121,7 +122,7 @@ observability 发现异常后，需要一套响应机制把「发现」变成「
 | **上游 runtime 升级** | 平台版本/引擎升级走灰度 + 回归测试，不盲目跟新 | [§6 DataOps CI/CD](06-team-topology.md#dataops-mindset) |
 | **Breaking Change 管理** | 平台或横切原则的 breaking change → 升 L1 版本 tag | [`anchors.md`](../anchors.md) 版本锚定 |
 | **联动 L2** | L1 横切锚点变更，通知所有引用它的 L2 Playbook 同步 | [Portfolio 规则 3](00-what-this-document-is.md#portfolio-constitution) |
-| **定期复盘选型** | 周期性回看 [§2 PDR](02-platform-selection.md#six-dimension-evaluation)，确认选型假设仍成立 | §2 单向门复审 |
+| **定期复盘选型** | 周期性回看 [§2 PDR](02-platform-selection.md#platform-decision-record)，确认选型假设仍成立 | §2 单向门复审 |
 
 > **与 Portfolio 宪法的闭环**：L1 任何被 [`anchors.md`](../anchors.md) 登记的 slug 发生 breaking change，必须升版本 tag 并通知 L2——这是 [§0 规则 3](00-what-this-document-is.md#portfolio-constitution) 在 Day-2 的具体执行。平台演进若不联动文档版本，跨 repo 引用就会悄悄腐烂成死链。
 
@@ -131,7 +132,7 @@ observability 发现异常后，需要一套响应机制把「发现」变成「
 
 | 产出物 | 关联 |
 |---|---|
-| [Value Heat Map](#sla-slo) | §5 MVP 选域 |
+| [Value Heat Map](#value-heat-map) | §5 MVP 选域 |
 | [SLA/SLO 框架](#sla-slo) | §3 Data Product / §1 基线 |
 | [FinOps 三原则 + 平台差异](#finops) | §5 退役 / §1 cost_sensitivity |
 | [Observability 四支柱](#data-observability) | §3 测试 / §4 parse-time |

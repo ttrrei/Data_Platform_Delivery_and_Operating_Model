@@ -4,7 +4,7 @@
 
 > **角色**：L3 横切方法论 **#4**。平台与团队能力的协同设计——技术升级必须匹配团队能力升级。
 > **边界**：组织设计**原则**，不写具体招聘 JD。
-> **依赖**：引用 [§2 的选型结论（PDR）](02-platform-selection.md#six-dimension-evaluation)。
+> **依赖**：引用 [§2 的选型结论（PDR）](02-platform-selection.md#platform-decision-record)。
 >
 > ← [上一节 Section 5](05-migration-greenfield.md) · [返回首页](../README.md)
 
@@ -52,7 +52,7 @@
 <a id="platform-team-capability-matrix"></a>
 ## 6.3 平台选型 → 团队能力矩阵影响表 ⭐
 
-平台选型（[§2 PDR](02-platform-selection.md#six-dimension-evaluation)，字段 `team_capability_ceiling`）直接决定团队需要什么能力配置。这是选型的**组织后果**，常被忽略：
+平台选型（[§2 PDR](02-platform-selection.md#platform-decision-record)，字段 `team_capability_ceiling`）直接决定团队需要什么能力配置。这是选型的**组织后果**，常被忽略：
 
 | 选型画像 | 对 DE 的要求 | 对 AE 的要求 | 团队风险 |
 |---|---|---|---|

@@ -1,4 +1,4 @@
-<!-- slug-anchors: one-way-door, six-dimension-evaluation, platform-scenario-mapping, platform-agnostic-architecture, distribution-mapping -->
+<!-- slug-anchors: one-way-door, six-dimension-evaluation, platform-decision-record, platform-scenario-mapping, platform-agnostic-architecture, distribution-mapping -->
 
 # Section 2 — Platform Selection & Architecture Decision Framework
 
@@ -93,6 +93,7 @@ Requirements Profile（§1 输出）
 - **加权打分**：其余维度按 Profile 的取向赋权。例：`cost_sensitivity: cost-leading` 则 FinOps 权重上调；`workload_type: ai-ml-centric` 则 Workload 权重上调。
 - **记录而非仅打分**：每个维度的得分必须附**一句理由**，写进 PDR。无理由的分数不可追溯，等于没评。
 
+<a id="platform-decision-record"></a>
 ### 2.2.3 Platform Decision Record（PDR）模板
 
 ```yaml
@@ -101,13 +102,13 @@ platform_decision_record:
   hard_gates:
     compliance_regime: PASS   # Enterprise 满足 sector-regulated 审计要求
     lock_in:           PASS   # single-cloud-ok，可接受
-  scores:               # 1–5，附理由
+  scores:               # 1–5，附理由；键为六维度名，↔ Profile 字段映射见 §2.2.1
     workload:   { score: 5, why: "analytical-bi 主负载，OLAP 引擎天然匹配" }
     team:       { score: 5, why: "SQL-first，团队 mid 能力即可驾驭" }
     governance: { score: 5, why: "Dynamic Masking + 审计 + 血缘齐备" }
     streaming:  { score: 3, why: "near-real-time 可满足；true-streaming 偏弱" }
-    finops:     { score: 4, why: "auto-suspend + resource monitor 控成本" }
-    lock_in:    { score: 3, why: "平台绑定中等，跨云可迁但有成本" }
+    finops:     { score: 4, why: "auto-suspend + resource monitor 控成本" }    # ← cost_sensitivity
+    lock_in:    { score: 3, why: "平台绑定中等，跨云可迁但有成本" }            # ← cloud_lock_in_tolerance
   decision: SELECTED
   one_way_door: true        # 标记为单向门，已走重型评审
   routes_to: L2/snowflake-lakehouse-playbook
@@ -124,8 +125,8 @@ platform_decision_record:
 
 | 代表性画像 | 默认指向 | 一句话理由 | 路由 L2 |
 |---|---|---|---|
-| `workload_type: analytical-bi` + `team: low~mid` + `governance: regulated` + `streaming: none~near-real-time` | **Snowflake** | SQL-first、低运维、审计治理成熟，低复杂度近实时分析的阻力最小路径 | [→ §2.5](#distribution-mapping) |
-| `workload_type: ai-ml-centric` + `team: high-software-engineering` + 需要统一 ML/数据工程 | **Databricks** | Lakehouse + Spark + MLflow，AI/ML 为中心、需要代码弹性的场景 | [→ §2.5](#distribution-mapping) |
+| `workload_type: analytical-bi` + `team_capability_ceiling: low~mid` + `governance_maturity: regulated` + `streaming_need: none~near-real-time` | **Snowflake** | SQL-first、低运维、审计治理成熟，低复杂度近实时分析的阻力最小路径 | [→ §2.5](#distribution-mapping) |
+| `workload_type: ai-ml-centric` + `team_capability_ceiling: high-software-engineering` + 需要统一 ML/数据工程 | **Databricks** | Lakehouse + Spark + MLflow，AI/ML 为中心、需要代码弹性的场景 | [→ §2.5](#distribution-mapping) |
 | 已深度绑定 GCP + 偏好 serverless + `cost_sensitivity` 敏感于闲置成本 | **BigQuery** | GCP-native、serverless、按量计费，无需管理集群 | [→ §2.5](#distribution-mapping) |
 
 > **如何用这张表**：评估完六维得到候选后，回看本表确认「我的画像与默认指向是否一致」。**若不一致，不代表选错，而是要求 PDR 里给出明确的偏离理由**（例如「画像偏 BI 但仍选 Databricks，因为两年内有明确 ML 路线图」——这是合理偏离）。
