@@ -67,7 +67,7 @@ Requirements Profile（§1 输出）
 
 > 在重监管行业，我们倾向 **Snowflake Enterprise Edition**，因其审计友好、安全能力强。它前期单价更高，但 multi-cluster 自动扩缩等能力反而优化了整体 **TCO（总拥有成本）**。
 
-这说明一个反直觉但关键的原则：**单向门决策不能只看 sticker price，要看 TCO 与不可逆风险的联合代价。** 在 `compliance_regime: sector-regulated` 的画像下，「更便宜但审计能力弱」的版本是一个**伪选项**——它在合规维度直接出局（见 §2.2 的一票否决机制）。
+这说明一个反直觉但关键的原则：**单向门决策不能只看 sticker price，要看 TCO 与不可逆风险的联合代价。** 在 `compliance_regime: sector-regulated` 的画像下，「更便宜但审计能力弱」的版本是一个**伪选项**——它在合规维度直接出局（见 §2.2 的一票否决机制）。版本底线还随监管强度上移：一般强合规场景 Enterprise 起步；涉及私网连接、增强加密与更高合规认证的硬监管场景（如银行核心系统），实际底线往往是 Business Critical 一级。
 
 ---
 
