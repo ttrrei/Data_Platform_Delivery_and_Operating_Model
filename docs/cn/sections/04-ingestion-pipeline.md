@@ -49,6 +49,16 @@
 
 > **实现要点（technology-agnostic）**：以「源 + 时间窗 + 批次 ID」为幂等键；写入用 overwrite-by-partition 或 merge-on-key，避免 append 产生重复；保留原始 payload 直到下游确认消费。
 
+### 4.1.3 Landing 的安全边界
+
+Landing 保存的是**未脱敏**的原始 payload——[§3 早脱敏](03-modeling-governance.md#governance-as-code) 的落点在 Bronze，覆盖不到这里。因此 Landing 自身必须满足三条强制规则：
+
+| 规则 | 要求 |
+|---|---|
+| **访问最小化** | Landing 仅对摄取引擎与平台管理角色可读，业务角色一律不可见（复用 [§3 RBAC 设计](03-modeling-governance.md#governance-as-code)） |
+| **保留期策略** | 原始 payload 按合规要求设保留/清理周期；「保留至下游确认消费」是**下限**，不是无限期 |
+| **落地前 tokenize（物理去标识化场景）** | 若合规禁止存储原始敏感值（如 PCI 对卡号），运行期动态脱敏不适用——须在写入 Landing **之前** tokenize，此时可重放性以 tokenized payload 为界 |
+
 ---
 
 <a id="ingestion-patterns"></a>
