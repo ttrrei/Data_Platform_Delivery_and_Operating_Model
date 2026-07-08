@@ -90,7 +90,8 @@ L3  横切方法论 (内嵌于 L1 Section 3/4/5/6/7)
 | **Medallion 三层职责** | [Section 3](sections/03-modeling-governance.md#medallion) | Section 2 / 4 / 5 / 7 |
 | **Governance-as-Code** | [Section 3](sections/03-modeling-governance.md#governance-as-code) | Section 2 / 5 / 7 |
 | **Landing Layer** | [Section 4](sections/04-ingestion-pipeline.md#landing-layer) | Section 2 / 5 |
-| **选型结论（Platform Decision Record）** | [Section 2](sections/02-platform-selection.md#six-dimension-evaluation) | Section 6（团队能力矩阵） |
+| **选型结论（Platform Decision Record）** | [Section 2](sections/02-platform-selection.md#platform-decision-record) | Section 6（团队能力矩阵） |
+| **Value Heat Map** | [Section 7](sections/07-day2-operations.md#value-heat-map) | Section 5（MVP 首域选择） |
 
 ---
 

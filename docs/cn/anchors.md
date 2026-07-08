@@ -9,6 +9,8 @@
 
 当前版本：`v0.1-draft`（CN 初稿；EN 翻译后升 `v1.0`）
 
+> **发版说明**：版本 tag 一律在 `main` 分支上创建。`v0.1-draft` 的 git tag 待 CN 收口合并 `main` 后补打；tag 存在之前，L2 暂缓按 `L1@<tag>#<slug>` 格式引用（目标 tag 尚不可解析）。
+
 ---
 
 ## Section 0 — What This Document Is
@@ -34,6 +36,7 @@
 |---|---|
 | `#one-way-door` | One-Way Door 决策框架 |
 | `#six-dimension-evaluation` | 六维评估模型（workload/team/governance/streaming/finops/lock-in） |
+| `#platform-decision-record` | Platform Decision Record（PDR）模板 —— 选型单向门的 ADR |
 | `#platform-scenario-mapping` | 三平台场景映射表 |
 | `#platform-agnostic-architecture` | 平台无关架构原则（OLAP/OLTP 分离、serving layer） |
 | `#distribution-mapping` | 分发映射（→ L2 外链路由） |
@@ -80,6 +83,7 @@
 | Slug | 含义 |
 |---|---|
 | `#sla-slo` | SLA / SLO 定义框架 |
+| `#value-heat-map` | Value Heat Map（业务价值 × 多团队使用度优先级热力图） |
 | `#finops` | FinOps 治理原则 + 各平台机制差异 |
 | `#data-observability` | Data Observability 框架（schema/downtime/volume/freshness） |
 | `#incident-response` | 事故分级 + RCA |

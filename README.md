@@ -44,7 +44,8 @@ L1  Data Platform Delivery & Operating Model   ← 本 repo
          ↓                      ↓                      ↓
 L2  Snowflake              Databricks             BigQuery
     Lakehouse Playbook     AI/ML Playbook         Analytical Playbook
-    (独立 repo)            (待写 · 独立 repo)     (未来 · 可选)
+    (已有 · 独立 repo)     (待写 · 独立 repo)     (未来 · 可选)
+    低复杂度近实时分析     AI + ML 为中心          GCP-native serverless
          │                      │                      │
          └──────────────────────┴──────────────────────┘
                           ↓
@@ -107,4 +108,7 @@ L3  横切方法论 (内嵌于 L1 Section 3/4/5/6/7)
 
 ## License
 
-待定 / TBD.
+© 2026 Xing Lu. All rights reserved.
+
+保留所有权利。未经作者书面授权，不得转载、演绎或用于商业用途。
+Reproduction, adaptation, or commercial use of this documentation without written permission is prohibited.

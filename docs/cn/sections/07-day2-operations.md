@@ -1,4 +1,4 @@
-<!-- slug-anchors: sla-slo, finops, data-observability, incident-response, platform-evolution -->
+<!-- slug-anchors: sla-slo, value-heat-map, finops, data-observability, incident-response, platform-evolution -->
 
 # Section 7 — Day-2 Operations & Platform Governance
 
@@ -13,6 +13,7 @@
 <a id="sla-slo"></a>
 ## 7.1 价值优先级与 SLA / SLO 框架
 
+<a id="value-heat-map"></a>
 ### 7.1.1 Value Heat Map（先拿 Quick Wins）
 
 > 在初期交付阶段，我用一张「**业务价值 × 多团队使用度**」的 **Heat Map（热力图）** 来优先排序高影响、跨职能的数据资产，尽早给 stakeholder 交付即时价值。
@@ -59,7 +60,7 @@
 
 | 机制 | Snowflake | Databricks | BigQuery |
 |---|---|---|---|
-| **闲置关停** | Warehouse auto-suspend | Cluster auto-termination | Serverless（天然无闲置计费） |
+| **闲置关停** | Warehouse auto-suspend | Cluster auto-termination | Serverless（按量模式天然无闲置计费；slot 预留的 baseline 闲置仍计费） |
 | **限额** | Resource Monitors | Budget / cluster policies | Quotas / 预留 slots / 按量上限 |
 | **成本归因** | Warehouse + query tagging | Cluster tags / system tables | Labels + billing export |
 | **弹性优化 TCO** | multi-cluster auto-scaling | autoscaling clusters | 自动 slot 调度 |
@@ -78,7 +79,9 @@
 | **Freshness（时效）** | 数据是否按时到达 | 对照 [§7.1 freshness SLO](#sla-slo) |
 | **Schema（结构漂移）** | 上游 schema 是否变化/破坏下游 | 最早采集点 = [§4 parse-time discipline](04-ingestion-pipeline.md#metadata-driven) |
 | **Volume（数据量）** | 行数/体量是否异常（突增/骤降） | 摄取批次统计 |
-| **Downtime / Quality（停摆与质量）** | 数据是否停更、质量是否劣化 | 质量测试 + 管道状态 |
+| **Downtime / Quality（停摆与质量）** | 数据是否停更、质量/分布是否漂移劣化（data drift） | 质量测试 + 分布基线比对 + 管道状态 |
+
+> 注：业界常见「五支柱」框架把 Distribution（分布漂移）单列为第五支柱；本框架将其并入 Downtime/Quality 支柱，监控对象一致。
 
 > **核心主张**：**static testing（静态测试）≠ observability。** [§3 的 dbt 测试](03-modeling-governance.md#governance-as-code) 在 CI 期捕获**已知**的坏；observability 在生产期持续捕获**未知**的异常（尤其上游 schema/volume 漂移）。二者互补，缺一不可。observability 的目标是**主动拦截**——在 executive 看到破掉的 dashboard **之前**就发现并响应。
 
@@ -121,7 +124,7 @@ observability 发现异常后，需要一套响应机制把「发现」变成「
 | **上游 runtime 升级** | 平台版本/引擎升级走灰度 + 回归测试，不盲目跟新 | [§6 DataOps CI/CD](06-team-topology.md#dataops-mindset) |
 | **Breaking Change 管理** | 平台或横切原则的 breaking change → 升 L1 版本 tag | [`anchors.md`](../anchors.md) 版本锚定 |
 | **联动 L2** | L1 横切锚点变更，通知所有引用它的 L2 Playbook 同步 | [Portfolio 规则 3](00-what-this-document-is.md#portfolio-constitution) |
-| **定期复盘选型** | 周期性回看 [§2 PDR](02-platform-selection.md#six-dimension-evaluation)，确认选型假设仍成立 | §2 单向门复审 |
+| **定期复盘选型** | 周期性回看 [§2 PDR](02-platform-selection.md#platform-decision-record)，确认选型假设仍成立 | §2 单向门复审 |
 
 > **与 Portfolio 宪法的闭环**：L1 任何被 [`anchors.md`](../anchors.md) 登记的 slug 发生 breaking change，必须升版本 tag 并通知 L2——这是 [§0 规则 3](00-what-this-document-is.md#portfolio-constitution) 在 Day-2 的具体执行。平台演进若不联动文档版本，跨 repo 引用就会悄悄腐烂成死链。
 
@@ -131,7 +134,7 @@ observability 发现异常后，需要一套响应机制把「发现」变成「
 
 | 产出物 | 关联 |
 |---|---|
-| [Value Heat Map](#sla-slo) | §5 MVP 选域 |
+| [Value Heat Map](#value-heat-map) | §5 MVP 选域 |
 | [SLA/SLO 框架](#sla-slo) | §3 Data Product / §1 基线 |
 | [FinOps 三原则 + 平台差异](#finops) | §5 退役 / §1 cost_sensitivity |
 | [Observability 四支柱](#data-observability) | §3 测试 / §4 parse-time |
