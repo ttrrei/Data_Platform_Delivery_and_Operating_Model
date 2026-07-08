@@ -60,7 +60,7 @@
 
 | 机制 | Snowflake | Databricks | BigQuery |
 |---|---|---|---|
-| **闲置关停** | Warehouse auto-suspend | Cluster auto-termination | Serverless（天然无闲置计费） |
+| **闲置关停** | Warehouse auto-suspend | Cluster auto-termination | Serverless（按量模式天然无闲置计费；slot 预留的 baseline 闲置仍计费） |
 | **限额** | Resource Monitors | Budget / cluster policies | Quotas / 预留 slots / 按量上限 |
 | **成本归因** | Warehouse + query tagging | Cluster tags / system tables | Labels + billing export |
 | **弹性优化 TCO** | multi-cluster auto-scaling | autoscaling clusters | 自动 slot 调度 |
@@ -79,7 +79,9 @@
 | **Freshness（时效）** | 数据是否按时到达 | 对照 [§7.1 freshness SLO](#sla-slo) |
 | **Schema（结构漂移）** | 上游 schema 是否变化/破坏下游 | 最早采集点 = [§4 parse-time discipline](04-ingestion-pipeline.md#metadata-driven) |
 | **Volume（数据量）** | 行数/体量是否异常（突增/骤降） | 摄取批次统计 |
-| **Downtime / Quality（停摆与质量）** | 数据是否停更、质量是否劣化 | 质量测试 + 管道状态 |
+| **Downtime / Quality（停摆与质量）** | 数据是否停更、质量/分布是否漂移劣化（data drift） | 质量测试 + 分布基线比对 + 管道状态 |
+
+> 注：业界常见「五支柱」框架把 Distribution（分布漂移）单列为第五支柱；本框架将其并入 Downtime/Quality 支柱，监控对象一致。
 
 > **核心主张**：**static testing（静态测试）≠ observability。** [§3 的 dbt 测试](03-modeling-governance.md#governance-as-code) 在 CI 期捕获**已知**的坏；observability 在生产期持续捕获**未知**的异常（尤其上游 schema/volume 漂移）。二者互补，缺一不可。observability 的目标是**主动拦截**——在 executive 看到破掉的 dashboard **之前**就发现并响应。
 
