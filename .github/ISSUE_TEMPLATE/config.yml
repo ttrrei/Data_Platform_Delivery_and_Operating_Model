@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
   - name: 阅读贡献指南 / Read the contributing guide
-    url: https://github.com/xinglu-lb/data_platform_delivery_and_operating_model/blob/main/CONTRIBUTING.md
+    url: https://github.com/xinglu-lb/Data_Platform_Delivery_and_Operating_Model/blob/main/CONTRIBUTING.md
     about: 提 issue / PR 前，先看写作约定、锚点纪律与升版本规则。Before filing, read the writing conventions, anchor discipline and versioning rules.

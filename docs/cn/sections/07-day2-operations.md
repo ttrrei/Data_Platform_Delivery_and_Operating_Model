@@ -43,6 +43,8 @@
 ## 7.2 FinOps 成本治理 ⭐
 
 > 上线后，建立严格的 **FinOps** 机制。在平台层配置 **warehouse 级资源监控、严格的 auto-suspend 策略、实时异常告警**，防止失控的 compute 账单。
+>
+> （FinOps 是业界既有的云成本管理实践（参见 FinOps Foundation）；本节取其 technology-agnostic 的原则，落到数据平台。）
 
 ### 7.2.1 FinOps 三原则（technology-agnostic）
 
@@ -72,7 +74,7 @@
 
 > 生产环境管理**不能只靠静态测试**。我们部署 **Data Observability** 框架，监控上游 schema 变更、数据停摆（data downtime）、数据漂移（data drift），确保工程团队在高管看到破图之前，就**主动拦截并解决**数据质量问题。
 
-### 监控的四个支柱
+### 7.3.1 监控的四个支柱
 
 | 支柱 | 监控什么 | 信号来源 |
 |---|---|---|

@@ -65,7 +65,7 @@
 |---|---|
 | `#greenfield-vs-migration` | 两种起步场景分叉 |
 | `#mvp-platform` | Greenfield MVP Platform 边界 |
-| `#migration-strategy` | 反 Big Bang / Domain-Driven / Dual-run / 自动对账 |
+| `#migration-strategy` | 反 Big Bang / Domain-Driven / Dual Running / 自动对账 |
 | `#legacy-decommissioning` | Legacy 退役作为硬性 KPI |
 
 ## Section 6 — Team Topology & Operating Structure

@@ -77,6 +77,11 @@ L3  横切方法论 (内嵌于 L1 Section 3/4/5/6/7)
 .
 ├── README.md                       ← 本文件（总体说明 / master index）
 ├── TASK_BRIEF.md                   ← 章节产出规划（写作 SOP）
+├── CONTRIBUTING.md                 ← 贡献指南（锚点纪律 / 三规则 / 风格）
+├── CHANGELOG.md                    ← 变更记录（Keep a Changelog / SemVer）
+├── .github/                        ← CODEOWNERS · issue/PR 模板 · docs-integrity CI
+├── scripts/
+│   └── check_anchors.py            ← docs-integrity 检查器（纯标准库，离线）
 └── docs/
     ├── cn/                         ← 中文版（权威源）
     │   ├── README.md               ← L1 中文入口
@@ -103,6 +108,13 @@ L3  横切方法论 (内嵌于 L1 Section 3/4/5/6/7)
 - **理解整体方法论 / 推动新平台 0→1**：进入 [中文版](docs/cn/README.md)，从 Section 1 顺序读到 Section 7。
 - **已知用哪个平台，只看架构设计**：读 Section 2 末尾的「分发映射」，跳到对应 L2 Playbook。
 - **写 / 维护某个 L2 文档**：先读 Section 3/4（横切方法论）——那是不应重复、只应引用的内容；引用锚点见 [`docs/cn/anchors.md`](docs/cn/anchors.md)。
+
+---
+
+## 贡献与变更 / Contributing & Changelog
+
+- 贡献指南（锚点纪律、三条规则、风格约定）/ Contribution guide: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- 变更记录（Keep a Changelog / SemVer）/ Changelog: [`CHANGELOG.md`](CHANGELOG.md)
 
 ---
 

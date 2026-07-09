@@ -64,7 +64,7 @@ L3  横切方法论（内嵌于 L1 Section 3/4/5/6/7）
 
 ### 规则 1 — L1 定义原则，L2 只写差异
 
-任何 **platform-agnostic** 的方法论，只在 L1 定义**一次**。L2 引用 L1，只补「该平台与通用原则的实现差异」，**不重讲原理**。
+任何 **technology-agnostic** 的方法论，只在 L1 定义**一次**。L2 引用 L1，只补「该平台与通用原则的实现差异」，**不重讲原理**。
 
 > 例：「Bronze 层必须脱敏」是原则，定义在 [Section 3](03-modeling-governance.md#governance-as-code)。Snowflake Playbook 不重复这句话，只写「在 Snowflake 用 Dynamic Masking Policy + Tag 实现 Bronze 脱敏」这一**差异**。
 
@@ -82,6 +82,8 @@ L2 外链 L1 横切章节时，**必须**引用带版本 tag 的稳定锚点：
 ```
 
 所有可被引用的锚点登记在 [`anchors.md`](../anchors.md)。**改一个已登记的 slug = breaking change**，必须升 L1 的版本 tag 并在 anchors 的 Deprecated 区留记录。
+
+> **当前状态（成熟度）**：本文档为 `v0.1-draft`，其 git tag 待 CN 收口合并 `main` 后创建。tag 存在之前，上述版本锚定格式尚不可解析，L2 应**暂缓**按 `L1@<tag>#<slug>` 引用（详见 [`anchors.md`](../anchors.md) 发版说明与 [`CHANGELOG`](../../../CHANGELOG.md)）。这套跨 repo 契约机制目前**已设计、待随 L2 落地逐步铺开**——本文档在单仓库内即完整可用。
 
 ---
 
@@ -107,6 +109,22 @@ L2 外链 L1 横切章节时，**必须**引用带版本 tag 的稳定锚点：
 | **Landing Layer** | [§4](04-ingestion-pipeline.md#landing-layer) | §2 / §5 |
 | **Platform Decision Record** | [§2](02-platform-selection.md#platform-decision-record) | §6 |
 | **Value Heat Map** | [§7](07-day2-operations.md#value-heat-map) | §5 |
+
+---
+
+## 0.6 范围边界（本文档有意不覆盖）
+
+L1 是**运营模式与生命周期方法论**，不是工程实施手册。以下主题**有意下放**给 L2 或后续版本，本文档不展开——在此显式声明，避免被误读为遗漏：
+
+| 主题 | 归属 | 原因 |
+|---|---|---|
+| 完整 TCO 测算模型（量化公式） | L2 / 交付期财务建模 | 依赖具体平台计价与用量；L1 只给[因子清单](02-platform-selection.md#one-way-door)与原则 |
+| RBAC / 脱敏以外的安全（网络隔离、密钥与 secrets、加密体系） | L2（平台特定） | 强平台相关；L1 只定[治理即代码](03-modeling-governance.md#governance-as-code)与访问最小化原则 |
+| DR / BCP（容灾与业务连续性） | L2 / 平台运维 | 与平台高可用能力强绑定 |
+| 源系统数据契约（Data Contract）细则 | L2 / 上游治理 | L1 只在[摄取](04-ingestion-pipeline.md#metadata-driven)侧要求 schema 显式声明与 fail-fast |
+| 多区域 / 数据驻留架构 | L2（平台特定） | 由合规区域与平台能力共同决定 |
+
+> 换言之，本文档「完整」指的是**运营模式叙事的完整闭环**（见 [§7.7](07-day2-operations.md#platform-evolution)），而非穷尽所有工程实施细节。
 
 ---
 

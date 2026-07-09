@@ -17,7 +17,7 @@
 ```text
 数据进来先落哪？ ─────→ [§4.1] Landing Layer（与 Bronze 的边界）
 用什么方式进来？ ─────→ [§4.2] batch / CDC / streaming 三模式
-要多实时？        ─────→ [§4.3] near-real-time vs. true streaming 决策
+要多实时？        ─────→ [§4.3] Near-Real-Time vs. True Streaming 决策
 怎么不重复造轮子？ ───→ [§4.4] metadata-driven 配置化 + parse-time discipline
 ```
 
@@ -88,7 +88,7 @@ Landing 保存的是**未脱敏**的原始 payload——[§3 早脱敏](03-model
 | **运维成本** | 中 | 高（常驻、状态管理、背压） |
 | **适用** | 绝大多数「业务说要实时」的需求 | 真正事件驱动：风控、实时告警、在线特征 |
 
-### 决策树
+### 4.3.1 决策树
 
 ```text
 业务延迟需求是？
@@ -102,7 +102,7 @@ Landing 保存的是**未脱敏**的原始 payload——[§3 早脱敏](03-model
                                             且业务能说出「秒级延迟带来的具体收益」）
 ```
 
-> **核心主张**：**「实时」是一种被严重高估的需求。** 在选 true streaming 前，强制业务回答：「分钟级延迟，会让你损失什么具体的钱或风险？」答不出 → 用 near-real-time。这条纪律直接影响 [§2 选型](02-platform-selection.md#six-dimension-evaluation) 的 streaming 维度评分与 [§7 的运维成本](07-day2-operations.md#finops)。
+> **核心主张**：**「实时」在多数场景是一种被高估的需求。** 在选 True Streaming 前，强制业务回答：「分钟级延迟，会让你损失什么具体的钱或风险？」答不出 → 用 near-real-time。这条纪律直接影响 [§2 选型](02-platform-selection.md#six-dimension-evaluation) 的 streaming 维度评分与 [§7 的运维成本](07-day2-operations.md#finops)。
 
 ---
 
