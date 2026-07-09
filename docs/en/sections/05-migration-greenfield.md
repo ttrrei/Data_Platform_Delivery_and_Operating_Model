@@ -27,7 +27,7 @@ There are only two fundamental scenarios for standing up a platform, and their s
 <a id="mvp-platform"></a>
 ## 5.2 Greenfield: The MVP Platform Boundary
 
-The most common way Greenfield dies is not technical — it is **greed**: trying to build the perfect platform in one shot, only to spend six months with no usable business output while the sponsor loses patience.
+The biggest way Greenfield dies is not technical — it is **greed**: trying to build the perfect platform in one shot, only to spend six months with no usable business output while the sponsor loses patience.
 
 ### 5.2.1 Defining the MVP Platform
 

@@ -34,7 +34,7 @@ Many teams conflate Landing and Bronze, and this is a common source of governanc
 
 | Layer | Responsibility | Form | Part of Medallion? |
 |---|---|---|---|
-| **Landing** | Catches the source system's **raw bytes**, unparsed and untabulated | Files/objects (e.g., raw payloads in object storage) | No, it is the **precursor** to Bronze |
+| **Landing** | Catches the source system's **raw bytes**, unparsed and not yet built into tables | Files/objects (e.g., raw payloads in object storage) | No, it is the **precursor** to Bronze |
 | **Bronze** (see [§3](03-modeling-governance.md#medallion)) | **Parses Landing's raw data into tables** + compliance masking | Structured tables, append | Yes, the first layer of the Medallion |
 
 > **Boundary principle**: Landing retains a **completely raw, entirely unparsed** copy of the data; structuring begins only at Bronze. This boundary means that a "parsing-logic bug" can be fixed by **replaying Landing alone**, without having to re-extract from the source system.
