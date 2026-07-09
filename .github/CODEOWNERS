@@ -1,0 +1,17 @@
+# Code owners — review is required for the single-source-of-truth content.
+# The cross-cutting sections and the anchor registry are the cross-repo contract;
+# changes to them must not land without an owner's review (Portfolio Rule 2/3).
+
+# Default owner for everything.
+*                       @xinglu-lb
+
+# Authoritative source — Chinese sections and the anchor registry.
+/docs/cn/sections/      @xinglu-lb
+/docs/cn/anchors.md     @xinglu-lb
+
+# English mirror must stay anchor-parallel to CN.
+/docs/en/sections/      @xinglu-lb
+
+# The integrity guard itself.
+/scripts/               @xinglu-lb
+/.github/               @xinglu-lb

@@ -1,0 +1,31 @@
+name: docs-integrity
+
+# Guards the repo's core promise (Portfolio Constitution, Section 0):
+# stable, version-anchored, dead-link-free cross references.
+# Runs the standard-library-only checker in scripts/check_anchors.py.
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "scripts/check_anchors.py"
+      - ".github/workflows/docs-integrity.yml"
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "scripts/check_anchors.py"
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check anchor registry, CN/EN parity and internal links
+        run: python3 scripts/check_anchors.py
