@@ -11,18 +11,18 @@
 
 ## Status
 
-The structure below mirrors the Chinese version one-to-one (same files, same stable slug anchors). Content will be filled in during the final translation pass.
+The structure below mirrors the Chinese version one-to-one (same files, same stable slug anchors). Each link points to the placeholder stub that will hold the translated body; content is filled in during the final translation pass.
 
 | # | Section | Role | EN Status |
 |---|---|---|---|
-| 0 | What This Document Is | Portfolio constitution | ⬜ Pending |
-| 1 | Strategic Alignment & Discovery | Lifecycle entry | ⬜ Pending |
-| 2 | Platform Selection & Architecture Decision Framework | **Hub / router** | ⬜ Pending |
-| 3 | Data Modeling & Governance-as-Code | Cross-cutting #1 | ⬜ Pending |
-| 4 | Ingestion & Pipeline Design | Cross-cutting #2 | ⬜ Pending |
-| 5 | Migration & Greenfield Strategy | Cross-cutting #3 | ⬜ Pending |
-| 6 | Team Topology & Operating Structure | Cross-cutting #4 | ⬜ Pending |
-| 7 | Day-2 Operations & Platform Governance | Cross-cutting #5 | ⬜ Pending |
+| 0 | [What This Document Is](sections/00-what-this-document-is.md) | Portfolio constitution | ⬜ Pending |
+| 1 | [Strategic Alignment & Discovery](sections/01-strategic-alignment.md) | Lifecycle entry | ⬜ Pending |
+| 2 | [Platform Selection & Architecture Decision Framework](sections/02-platform-selection.md) | **Hub / router** | ⬜ Pending |
+| 3 | [Data Modeling & Governance-as-Code](sections/03-modeling-governance.md) | Cross-cutting #1 | ⬜ Pending |
+| 4 | [Ingestion & Pipeline Design](sections/04-ingestion-pipeline.md) | Cross-cutting #2 | ⬜ Pending |
+| 5 | [Migration & Greenfield Strategy](sections/05-migration-greenfield.md) | Cross-cutting #3 | ⬜ Pending |
+| 6 | [Team Topology & Operating Structure](sections/06-team-topology.md) | Cross-cutting #4 | ⬜ Pending |
+| 7 | [Day-2 Operations & Platform Governance](sections/07-day2-operations.md) | Cross-cutting #5 | ⬜ Pending |
 
 ---
 

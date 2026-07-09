@@ -22,6 +22,8 @@
 ## 6.1 DataOps Mindset 转型
 
 > 传统数据团队常依赖拖拽式 ETL 工具或裸写存储过程，缺乏核心**软件工程纪律**。我推动团队转向 **DataOps mindset**，让版本控制（Git Flow）、单元测试（TDD）、持续集成（CI/CD）成为每个数据工程师的**基础技能**。
+>
+> （DataOps 是业界既有的方法论运动，把 DevOps 的工程纪律迁移到数据工作流；本节取其核心实践。）
 
 | 维度 | 传统数据团队 | DataOps 团队 |
 |---|---|---|
@@ -38,6 +40,8 @@
 ## 6.2 角色拓扑：DE / Analytics Engineer / BI 三层分工 ⭐
 
 > 我引入 **Analytics Engineer（分析工程师）** 角色，作为 Data Engineer (DE) 与 Business Analyst (BI) 之间的桥梁。
+>
+> （Analytics Engineer 角色及「AE 居 DE 与 BI 之间」的分工由 dbt Labs 在 Modern Data Stack 语境下提出并推广；本节采用该分工并映射到 Medallion 各层。）
 
 | 角色 | 核心职责 | 对应 Medallion 层 | 关键技能 |
 |---|---|---|---|

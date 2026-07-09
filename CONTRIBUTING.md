@@ -1,6 +1,6 @@
 # 贡献指南 / Contributing
 
-> 本文档是 **L1 — technology-agnostic 方法论**。它的价值在于**稳定、可版本锚定、无死链**的跨 repo 引用契约(见 [Portfolio 宪法](docs/cn/sections/00-what-this-document-is.md#portfolio-constitution)）。贡献前请先读完本指南。
+> 本文档是 **L1 — technology-agnostic 方法论**。它的价值在于**稳定、可版本锚定、无死链**的跨 repo 引用契约（见 [Portfolio 宪法](docs/cn/sections/00-what-this-document-is.md#portfolio-constitution)）。贡献前请先读完本指南。
 >
 > This repo is an **L1 technology-agnostic methodology**. Its value is a **stable, version-anchored, dead-link-free** cross-repo reference contract. Please read this guide before contributing.
 
@@ -22,7 +22,7 @@
 
 完整论述见 [Portfolio 宪法](docs/cn/sections/00-what-this-document-is.md#portfolio-constitution) 与[三层结构](docs/cn/sections/00-what-this-document-is.md#three-layer-structure)。
 
-1. **L1 定义原则，L2 只写差异。** 任何 platform-agnostic 的方法论只在 L1 定义一次；非权威章节只引用、不重写。
+1. **L1 定义原则，L2 只写差异。** 任何 technology-agnostic 的方法论只在 L1 定义一次；非权威章节只引用、不重写。
 2. **横切章节是唯一权威源。** L1 与某个 L2 冲突时以 L1 为准；L2 若发现原则不适用，走 issue 修订 L1，不在 L2 私自改写。
 3. **跨 repo 引用必须版本锚定。** L2 外链 L1 用带版本 tag 的稳定锚点 `L1@<tag>#<slug>`，不链 `main` 浮动内容。
 

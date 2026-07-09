@@ -10,11 +10,19 @@ on:
       - "docs/**"
       - "scripts/check_anchors.py"
       - ".github/workflows/docs-integrity.yml"
+      - "README.md"
+      - "TASK_BRIEF.md"
+      - "CONTRIBUTING.md"
+      - "CHANGELOG.md"
   push:
     branches: [main]
     paths:
       - "docs/**"
       - "scripts/check_anchors.py"
+      - "README.md"
+      - "TASK_BRIEF.md"
+      - "CONTRIBUTING.md"
+      - "CHANGELOG.md"
   workflow_dispatch: {}
 
 jobs:
