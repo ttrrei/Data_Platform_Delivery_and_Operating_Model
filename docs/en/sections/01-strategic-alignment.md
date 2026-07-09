@@ -2,7 +2,7 @@
 
 # Section 1 — Strategic Alignment & Discovery
 
-> **Role**: The starting point of the L1 narrative. Turn fuzzy business demands into a structured input that can be fed directly into platform selection.
+> **Role**: The starting point of the L1 narrative. Turn fuzzy business needs into a structured input that can be fed directly into platform selection.
 > **Output contract**: [Requirements Profile](#requirements-profile) — the only output of this section that is binding on downstream work, referenced field by field in [Section 2](02-platform-selection.md).
 > **Boundary**: This section makes **no platform-selection judgement whatsoever**. The moment the thought "should we pick Snowflake or Databricks" arises, stop — that belongs to Section 2.
 >
