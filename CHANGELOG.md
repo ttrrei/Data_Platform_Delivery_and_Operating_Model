@@ -19,6 +19,8 @@ All notable changes to this L1 document are recorded here. Format follows Keep a
   `CONTRIBUTING.md` (three-place anchor-sync discipline, the three Portfolio rules, style conventions).
 - 本 `CHANGELOG.md`。
   This `CHANGELOG.md`.
+- **英文版翻译**：从中文权威源翻译 `docs/en/` 全 8 章（Section 0–7）+ `docs/en/README.md`，结构/表格/代码块/契约字段与 CN 逐一对齐，锚点 CN/EN parity 36/36；EN 内 `../anchors.md` 链接改指 `../../cn/anchors.md`（注册表仅存于 CN）；`docs/en/README.md` 状态由 ⬜ Pending 更新为 ✅ Draft；docs-integrity 校验全绿。
+  **English translation**: translated all 8 `docs/en/` sections (0–7) plus `docs/en/README.md` from the authoritative CN source; structure/tables/code blocks/contract fields mirror CN one-to-one with 36/36 CN/EN anchor parity; EN `../anchors.md` links repointed to `../../cn/anchors.md` (the registry lives only under CN); `docs/en/README.md` status moved from ⬜ Pending to ✅ Draft; docs-integrity checks pass.
 - **CN 定稿前的内容审查修订**：§3 新增「建模范式的选择」（维度建模 / Data Vault / 宽表 + grain / SCD 归属）；§0.6「范围边界」显式声明有意下放的主题（TCO 模型 / 网络与密钥安全 / DR·BCP / 数据契约 / 多区域）；§2.1.4「TCO 构成」因子清单；§2.2.3 增补 Databricks PDR 示例；为借用概念补来源署名（One-Way Door → Amazon、Medallion → Databricks、Analytics Engineer → dbt Labs、DataOps / FinOps）。
   **Pre-finalization content review**: added §3 "Modeling paradigm" (dimensional / Data Vault / one-big-table + grain / SCD ownership); §0.6 "Scope boundaries" (TCO model / network & secrets security / DR·BCP / data contracts / multi-region deliberately deferred); §2.1.4 TCO factor list; a second (Databricks) PDR example in §2.2.3; source attributions for borrowed concepts (One-Way Door → Amazon, Medallion → Databricks, Analytics Engineer → dbt Labs, DataOps / FinOps).
 

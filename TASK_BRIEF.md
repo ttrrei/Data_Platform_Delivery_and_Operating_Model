@@ -142,7 +142,7 @@ Section 7 (Day-2 Ops)                         ← 引用 3/4 的产物定义
 - [x] Requirements Profile 字段在 Section 1 定义、Section 2 引用，命名一致
 - [x] 横切方法论无重复定义（Section 2/5/6/7 对 3/4 均为引用而非重写）
 - [ ] Section 2 分发映射填入真实 L2 repo URL（Snowflake repo 已存在、URL 待补填；Databricks / BigQuery 待 Playbook 落地）
-- [ ] 中文版定稿后产出英文版
+- [x] 中文版定稿后产出英文版（`docs/en/` 全 8 章 + README，结构/锚点与 CN 逐一对齐）
 - [x] README 章节地图状态全部更新
 
 ---
