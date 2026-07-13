@@ -31,12 +31,16 @@ Requirements Profile（§1 输出）
 [5] 分发映射 ──────────── 路由到对应 L2 Playbook
 ```
 
+> **关于平台范围**：本节以 **Snowflake / Databricks / BigQuery** 为具体承载，因为它们覆盖了当前企业数据平台的主流形态（SQL-first 仓库 / Lakehouse / serverless）。但**六维评估框架本身是 technology-agnostic 的**——换成 Redshift、Microsoft Fabric/Synapse、ClickHouse、开放 Iceberg 湖仓或 Postgres，同一套维度与打分照样适用，只是候选集不同。三平台是**代表性载体，不是方法论的边界**。
+
 ---
 
 <a id="one-way-door"></a>
 ## 2.1 One-Way Door 决策框架
 
 > 定义架构蓝图时，我对 **「one-way door decisions」（单向门决策）** 极度警惕——那些事后**极其昂贵或几乎不可能逆转**的根本性战略选择。
+>
+> （「单向门 / 双向门」的决策分类源自 Amazon / Jeff Bezos；本节将其应用到数据平台的架构与选型决策。）
 
 ### 2.1.1 定义与识别
 
@@ -63,11 +67,29 @@ Requirements Profile（§1 输出）
 | **合规版本/区域选型** | 监管区域、审计能力事后难补 | `compliance_regime` |
 | **核心建模范式** | Medallion 分层一旦铺开难重构（见 §3） | `governance_maturity` |
 
-### 2.1.3 案例：合规驱动下的版本选型
+### 2.1.3 案例（以 Snowflake 为例）：合规驱动下的版本选型
 
 > 在重监管行业，我们倾向 **Snowflake Enterprise Edition**，因其审计友好、安全能力强。它前期单价更高，但 multi-cluster 自动扩缩等能力反而优化了整体 **TCO（总拥有成本）**。
 
 这说明一个反直觉但关键的原则：**单向门决策不能只看 sticker price，要看 TCO 与不可逆风险的联合代价。** 在 `compliance_regime: sector-regulated` 的画像下，「更便宜但审计能力弱」的版本是一个**伪选项**——它在合规维度直接出局（见 §2.2 的一票否决机制）。版本底线还随监管强度上移：一般强合规场景 Enterprise 起步；涉及私网连接、增强加密与更高合规认证的硬监管场景（如银行核心系统），实际底线往往是 Business Critical 一级。
+
+> **注**：以上版本名是 Snowflake 的具体例子，用来说明「合规是硬门槛、要看 TCO 而非 sticker price」这条 **technology-agnostic 原则**；换到 Databricks 或 BigQuery，对应的是各自的 tier / edition 与网络隔离、加密选项——**原则一致，具体名目不同**。
+
+### 2.1.4 TCO 的构成（不只是 sticker price）
+
+「看 TCO 而非单价」要落到可核对的因子。L1 给一份 technology-agnostic 的清单，具体数值在交付期按选定平台填：
+
+| 因子 | 说明 |
+|---|---|
+| **License / 平台费** | edition/tier 差价、承诺用量折扣 |
+| **Compute** | 查询/作业算力，含弹性伸缩与并发峰值 |
+| **Storage** | 存储 + 时间旅行/快照/多副本冗余 |
+| **数据出口（Egress）** | 跨云/跨区传输费，常被低估 |
+| **运维人力** | 平台运维 + 团队能力缺口的[招聘/培训成本](06-team-topology.md#platform-team-capability-matrix)（见 §6.3） |
+| **迁移成本** | 一次性迁入 + [Dual Running](05-migration-greenfield.md#migration-strategy) 期的双份账单（见 §5） |
+| **机会成本 / 锁定** | 迁出成本与 lock-in 风险（单向门的联合代价） |
+
+> **用法**：TCO 不是选型后才算的账，而是[六维评估](#six-dimension-evaluation) FinOps 维度与单向门决策的**输入**。sticker price 最低 ≠ TCO 最低。
 
 ---
 
@@ -96,6 +118,10 @@ Requirements Profile（§1 输出）
 <a id="platform-decision-record"></a>
 ### 2.2.3 Platform Decision Record（PDR）模板
 
+> **每个候选平台各出一份 PDR。** 下面给两个填写示例——同一套评估框架在不同 Requirements Profile 下会得出**不同结论**；示例本身不代表默认推荐。
+
+**示例 A — `analytical-bi` + `regulated` 画像下的一个候选：**
+
 ```yaml
 platform_decision_record:
   candidate: Snowflake-Enterprise
@@ -113,6 +139,28 @@ platform_decision_record:
   one_way_door: true        # 标记为单向门，已走重型评审
   routes_to: L2/snowflake-lakehouse-playbook
 ```
+
+**示例 B — 换成 `ai-ml-centric` + `high-software-engineering` 画像，同一框架给出不同结论：**
+
+```yaml
+platform_decision_record:
+  candidate: Databricks
+  hard_gates:
+    compliance_regime: PASS   # Unity Catalog 满足审计/血缘要求
+    lock_in:           PASS   # prefer-portable：Lakehouse + 开放格式可接受
+  scores:               # 1–5，附理由
+    workload:   { score: 5, why: "ai-ml-centric 主负载，Spark + MLflow 天然匹配" }
+    team:       { score: 4, why: "团队 high-software-engineering，可驾驭集群/notebook" }
+    governance: { score: 4, why: "Unity Catalog 治理完善；细粒度脱敏需额外配置" }
+    streaming:  { score: 5, why: "Structured Streaming 原生支持 true-streaming" }
+    finops:     { score: 3, why: "集群成本需 autoscaling + cluster policy 严格治理" }
+    lock_in:    { score: 4, why: "Delta / Iceberg 开放格式降低迁出成本" }
+  decision: SELECTED
+  one_way_door: true
+  routes_to: L2/databricks-ai-ml-playbook
+```
+
+> 两份 PDR 的对比说明一点：**框架是中立的，结论由 Profile 驱动**——`analytical-bi + regulated` 指向 Snowflake，`ai-ml-centric + 强工程团队` 指向 Databricks。相同维度、不同权重与得分。
 
 > PDR 是选型这个**单向门**的 ADR（Architecture Decision Record）。它必须被存档、版本化，并在 Day-2 复盘（§7）时回看。
 

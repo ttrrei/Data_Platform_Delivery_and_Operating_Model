@@ -24,13 +24,33 @@
 ---
 
 <a id="medallion"></a>
-## 3.1 Medallion 架构（Bronze / Silver / Gold）⭐
+## 3.1 数据建模：范式与 Medallion 分层 ⭐
 
 > 采用 **Medallion（Bronze/Silver/Gold）** 架构，把**原始系统摄取逻辑**与**下游业务计算逻辑**彻底解耦。
 
 这是被全体 L2 引用的分层定义。**任何平台的架构都按此分层职责落地。**
 
-### 3.1.1 三层职责定义
+> （Medallion 分层架构由 Databricks 提出；本节给出的是 technology-agnostic 的分层职责定义，任何平台均可落地。）
+
+### 3.1.1 建模范式的选择（Modeling Paradigm）
+
+Medallion 是**分层**（raw → cleansed → curated），不是**建模范式**。分层解决「摄取与业务计算解耦」，范式解决「Silver/Gold 里的表按什么结构组织」。二者正交，**必须都定**——只搭了 Medallion 却没定范式，是常见的隐性建模债。
+
+L1 只定**范式选型原则**，不锁死具体范式（DDL 级细节属于 L2）：
+
+| 范式 | 适用信号 | 代价 / 注意 |
+|---|---|---|
+| **维度建模（Star Schema / Kimball）** | BI 与自助分析为主、口径需对业务直观（`workload_type: analytical-bi`） | 需前置定义 grain 与一致性维度；聚合友好，是多数分析场景默认 |
+| **Data Vault** | 多源整合、强审计溯源、源频繁变更（`governance_maturity: regulated`） | 结构冗长，查询需下游再建集市，工程成本高 |
+| **宽表 / One Big Table** | 单一消费场景、追求查询简单与列存性能 | 冗余高、口径易发散，不利多消费者复用 |
+
+> **两条必须在建模期定死的决策**：
+> - **Grain（粒度）**：每张事实/明细表「一行代表什么」必须唯一且显式声明——粒度含糊是下游口径冲突的头号根因。
+> - **SCD（缓变维，Slowly Changing Dimension）**：维度历史如何留痕（Type 1 覆盖 / Type 2 留历史版本）由业务对「可追溯」的要求决定，通常在 Silver→Gold 落地。
+
+> **归属与不可逆性**：范式选择在 L1 定原则，具体 DDL、dbt 物化策略、SCD 实现属于 [L2](02-platform-selection.md#distribution-mapping)。范式一旦大规模铺开，重构成本极高——属 [§2.1 单向门](02-platform-selection.md#one-way-door) 一类，选型期即须定。
+
+### 3.1.2 三层职责定义
 
 | 层 | 别名 | 职责 | 数据形态 | 谁负责（见 §6） |
 |---|---|---|---|---|
@@ -40,7 +60,7 @@
 
 > **关键边界**：Bronze 只管「原样进来 + 合规脱敏」，**绝不**承载业务计算；业务口径只在 Silver→Gold 发生。这道边界就是「技术债解耦」的本体——改业务口径不碰摄取，改摄取不污染业务层。
 
-### 3.1.2 Promotion Criteria（晋级门槛）⭐
+### 3.1.3 Promotion Criteria（晋级门槛）⭐
 
 数据**不会自动**从一层升到下一层。每次晋级是一道**自动门控**（这正是 [Governance-as-Code](#governance-as-code) 的落点）：
 
@@ -82,10 +102,10 @@
 |---|---|---|
 | 1 | **治理写进流水线，不写进会议** | 治理规则 = CI/CD 检查；违反 = 构建失败，无法合并/晋级 |
 | 2 | **早脱敏（Shift-Left Security）** | 在 **Bronze 层**就按合规脱敏，而非等到消费层 |
-| 3 | **质量门控即晋级门槛** | [§3.1.2 promotion criteria](#medallion) 由自动测试强制 |
+| 3 | **质量门控即晋级门槛** | [§3.1.3 promotion criteria](#medallion) 由自动测试强制 |
 | 4 | **防御式访问控制（RBAC）** | day-1 设计 RBAC，防 role explosion 与 PII 泄漏 |
 
-### 3.3.2 早脱敏：在 dbt 开发期用 Tag 注入安全（Governance as Code）
+### 3.3.2 早脱敏：在 dbt 开发期用 Tag 注入安全（Governance-as-Code）
 
 > 在 Bronze 层早期，我们按监管要求脱敏。把安全规则通过 **Tagging（治理即代码）** 直接烘焙进 **dbt 开发阶段**——平台侧用动态脱敏策略（如 Snowflake Dynamic Masking Policy）落地。
 

@@ -79,8 +79,9 @@ Section 7 (Day-2 Ops)                         ← 引用 3/4 的产物定义
 - **依赖**：Section 1 的 Requirements Profile；引用 Section 3 的 Medallion 定义。
 
 ### Section 3 — Data Modeling & Governance-as-Code
-- **目标**：定义建模分层与治理即代码的权威原则（L3）。
+- **目标**：定义建模范式、分层与治理即代码的权威原则（L3）。
 - **必含产出物**：
+  - 建模范式选型原则（维度建模 / Data Vault / 宽表；grain 与 SCD 的决策归属）
   - Medallion 三层职责定义 + promotion criteria
   - Data Productization 定义（reliable / discoverable / secure）
   - Governance-as-Code 原则（CI/CD 嵌入、Bronze 层脱敏、质量门控）
@@ -93,7 +94,7 @@ Section 7 (Day-2 Ops)                         ← 引用 3/4 的产物定义
 - **必含产出物**：
   - Landing Layer 设计原则（与 Bronze 边界、幂等、可重放）
   - batch / CDC / streaming 三类模式边界
-  - near-real-time vs. true streaming 决策逻辑
+  - Near-Real-Time vs. True Streaming 决策逻辑
   - metadata-driven 配置化原则 + parse-time discipline
 - **边界**：不绑定具体编排工具实现。
 - **依赖**：引用 Section 3 的 Bronze 定义。被 5/7 引用。
@@ -103,7 +104,7 @@ Section 7 (Day-2 Ops)                         ← 引用 3/4 的产物定义
 - **必含产出物**：
   - Greenfield vs. Migration 场景分叉
   - Greenfield：MVP Platform 边界
-  - Migration：反 Big Bang、Domain-Driven、Dual-run + 自动对账、零方差验证
+  - Migration：反 Big Bang、Domain-Driven、Dual Running + 自动对账、零方差验证
   - Legacy Decommissioning 作为硬性 KPI
 - **边界**：不写具体平台的迁移工具。
 - **依赖**：引用 Section 3/4 的层与管道定义。
@@ -141,7 +142,7 @@ Section 7 (Day-2 Ops)                         ← 引用 3/4 的产物定义
 - [x] Requirements Profile 字段在 Section 1 定义、Section 2 引用，命名一致
 - [x] 横切方法论无重复定义（Section 2/5/6/7 对 3/4 均为引用而非重写）
 - [ ] Section 2 分发映射填入真实 L2 repo URL（Snowflake repo 已存在、URL 待补填；Databricks / BigQuery 待 Playbook 落地）
-- [ ] 中文版定稿后产出英文版
+- [x] 中文版定稿后产出英文版（`docs/en/` 全 8 章 + README，结构/锚点与 CN 逐一对齐）
 - [x] README 章节地图状态全部更新
 
 ---

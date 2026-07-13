@@ -53,7 +53,7 @@ L3  横切方法论 (内嵌于 L1 Section 3/4/5/6/7)
 
 整套体系长期可维护，靠三条强制规则（完整论述见 [Section 0](sections/00-what-this-document-is.md)）：
 
-1. **L1 定义原则，L2 只写差异。** 任何 platform-agnostic 的方法论只在 L1 定义一次；L2 引用 L1，只补该平台的实现差异，不重讲原理。
+1. **L1 定义原则，L2 只写差异。** 任何 technology-agnostic 的方法论只在 L1 定义一次；L2 引用 L1，只补该平台的实现差异，不重讲原理。
 2. **横切章节是唯一权威源（single source of truth）。** L1 与某 L2 表述冲突时，以 L1 为准。
 3. **跨 repo 引用必须版本锚定。** L2 外链 L1 横切章节时，引用带版本 tag 的稳定锚点（如 `L1@v1.2#governance-as-code`），不链 main 浮动内容。锚点登记表见 [`anchors.md`](anchors.md)。
 
